@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}"> <!-- Link to result.css -->
+</head>
+<body>
+    <h1>Result</h1>
+    {% if success %}
+        <p>Translation successful!</p>
+        <a href="/static/output_Trans.txt" download>Download Translated Text</a>
+
+        <!-- Display the content of the output_Trans.txt file using JavaScript -->
+        <div class="text-preview">
+            <h2>Preview of Translated Text:</h2>
+            <pre id="translated-text"></pre>
+        </div>
+
+        <script>
+            fetch("/static/output_Trans.txt")
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById("translated-text").textContent = text;
+                })
+                .catch(error => {
+                    console.error("Error fetching and displaying text:", error);
+                });
+        </script>
+    {% else %}
+        <p>Error: Please upload a video and choose a language.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Transcription and Translation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> <!-- Link to index.css -->
+</head>
+<body>
+    <h1>Video Transcription and Translation</h1>
+
+    <div class="centered-image">
+        <img src="{{ url_for('static', filename='SiHBanner.png') }}" alt="SiH">
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="video" accept=".mp4">
+        <select name="language_code" id="language_code">
+            <option value="hi">Hindi</option>
+            <option value="bn">Bengali</option>
+            <option value="ta">Tamil</option>
+            <option value="te">Telugu</option>
+            <option value="mr">Marathi</option>
+            <option value="gu">Gujarati</option>
+            <option value="kn">Kannada</option>
+            <option value="ml">Malayalam</option>
+            <option value="pa">Punjabi</option>
+            <option value="or">Odia</option>
+            <!-- Add other language options here -->
+        </select>
+        <input type="hidden" name="selected_language_code" id="selected_language_code">
+        <input type="submit" value="Transcribe and Translate" onclick="setLanguageCode()">
+    </form>
+    
+    <script>
+        function setLanguageCode() {
+            // Get the selected language code from the dropdown
+            const selectedLanguage = document.getElementById("language_code").value;
+            
+            // Set the selected language code in the hidden input field
+            document.getElementById("selected_language_code").value = selectedLanguage;
+        }
+    </script>
+</body>
+</html>
